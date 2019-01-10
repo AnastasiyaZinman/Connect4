@@ -23,7 +23,20 @@ class App extends Component {
   toggleUser = () => {
     this.state.current = this.state.current === "green" ? "blue" : "green"
   }
-  checkRow = (y, currentUser) => {
+  getTopElement = (x) => {
+    
+    console.log("x=",x, "this.state.board.length ",this.state.board[x].length)
+    for (let j = 0; j < this.state.board[x].length; j++) {
+      if (this.state.board[x][j+1] === undefined) {
+        return j 
+      }
+    }
+    return this.state.board[x].length
+  }
+  checkRow = (x, currentUser) => {
+    // debugger;
+    let y = this.getTopElement(x);
+    console.log(`y= ${y}`);
     let count = 0; let i = 0;
     while (i < this.state.board.length && count < 4) {
       if (this.state.board[i][y] === currentUser) {
@@ -33,7 +46,7 @@ class App extends Component {
         count = 0;
       }
       i++
-      }
+    }
     if (count == 4) {
       alert(`Player ${currentUser} won!`)
       // this.clearBoard()
