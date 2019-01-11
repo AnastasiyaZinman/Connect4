@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 class GridCell extends Component {
     handleClick() {
-        console.log(`Clicked on column x ${this.props.x}`);
-        console.log(`Clicked on row  y ${this.props.y}`);
-        // console.log("this.props.currentUser",this.props.currentUser);
         this.props.sendTileDrop(this.props.x); //push new tile to array
-        this.props.checkRowAndColumn(this.props.x);  //, this.props.currentUser check row on 4 tiles if same color
-        this.props.checkDiagonals(this.props.x); //check diagonal1 on 4 tiles if same color
-        // this.props.checkDiagonal2(this.props.x, this.props.currentUser); //check diagonal2 on 4 tiles if same color
+        this.props.checkRowColumnDiagonals(this.props.x);  //, this.props.currentUser check row on 4 tiles if same color
     }
 render() {
     let cellClass = "cell ",
