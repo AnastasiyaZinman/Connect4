@@ -33,7 +33,8 @@ class App extends Component {
     }
     return -1 //this.state.board[x].length
   }
-  checkRowAndColumn = (x, currentUser) => {
+  checkRowAndColumn = (x) => {
+    let currentUser = this.state.current;
     let y = this.getTopElement(x);
     // console.log(`y= ${y}`);
     let countByRow = 0, countByColumn = 0; let i = 0;
@@ -43,6 +44,19 @@ class App extends Component {
       i++
     }
     this.checkWinner(countByRow, countByColumn)
+  }
+  checkDiagonals = (x) => {
+    // debugger;
+    let currentUser = this.state.current;
+    let y = this.getTopElement(x),  countByLeftDiagonal=0, 
+        j =((y+x)< ROW_BOARD-1) ? x+y : ROW_BOARD -1,
+        i = ((y+x)< ROW_BOARD-1) ? 0 : x+y-j;
+    while ((j >=0 && i<= COL_BOARD -1) && countByLeftDiagonal < 4) {
+      countByLeftDiagonal = (this.state.board[i][j] === currentUser) ? countByLeftDiagonal += 1 : countByLeftDiagonal = 0;
+      i++; j--;
+    }
+    console.log("countDiagonal ", countByLeftDiagonal)
+    if (countByLeftDiagonal==4) alert("win");
   }
 
   clearBoard() { 
@@ -69,6 +83,7 @@ class App extends Component {
           currentUser = {this.state.current}
           sendTileDrop = {this.sendTileDrop}
           checkRowAndColumn = {this.checkRowAndColumn}
+          checkDiagonals = {this.checkDiagonals}
           key = {x + y}
           x = {x}
           y = {y}
