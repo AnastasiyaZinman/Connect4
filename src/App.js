@@ -33,36 +33,30 @@ class App extends Component {
     }
     return -1 //this.state.board[x].length
   }
-  checkRow = (x, currentUser) => {
+  checkRowAndColumn = (x, currentUser) => {
     let y = this.getTopElement(x);
     // console.log(`y= ${y}`);
-    let count = 0; let i = 0;
-    while (i < this.state.board.length && count < 4) {
-      count = (this.state.board[i][y] === currentUser) ? count += 1 : count = 0;
+    let countByRow = 0, countByColumn = 0; let i = 0;
+    while (i < this.state.board.length && countByRow < 4 && countByColumn < 4) {
+      countByRow = (this.state.board[i][y] === currentUser) ? countByRow += 1 : countByRow = 0;
+      countByColumn = (this.state.board[x][i] === currentUser) ? countByColumn += 1 : countByColumn = 0;
       i++
     }
-    this.checkWinner(count) //
+    this.checkWinner(countByRow, countByColumn)
   }
-  checkColumn = (x, currentUser) => {
-    let count = 0; let j = 0;
-    while (j < this.state.board.length && count < 4) {
-      count = (this.state.board[x][j] === currentUser) ? count += 1 : count = 0;
-      j++
-    }
-    this.checkWinner(count) //
-  }
+
   clearBoard() { 
     this.setState({board:[
       [], [], [], [], [], [], []  // 7 columns
     ]})
     this.createBoard()
   }
-  checkWinner(count) {
-    if (count === 4) {
+  checkWinner(count1,count2) {
+    if (count1 === 4 || count2 === 4) {
       this.setState({winMessage : true});
-      this.toggleUser();
       this.clearBoard()
     }
+    else this.toggleUser();
   }
   createBoard = () => {
     const cells = [];
@@ -74,9 +68,7 @@ class App extends Component {
           tileColor = {this.state.board[x][y]}
           currentUser = {this.state.current}
           sendTileDrop = {this.sendTileDrop}
-          toggleUser = {this.toggleUser}
-          checkRow = {this.checkRow}
-          checkColumn = {this.checkColumn}
+          checkRowAndColumn = {this.checkRowAndColumn}
           key = {x + y}
           x = {x}
           y = {y}

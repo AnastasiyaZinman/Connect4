@@ -5,11 +5,9 @@ class GridCell extends Component {
         console.log(`Clicked on row  y ${this.props.y}`);
         // console.log("this.props.currentUser",this.props.currentUser);
         this.props.sendTileDrop(this.props.x); //push new tile to array
-        this.props.checkRow(this.props.x, this.props.currentUser);     //check row on 4 tiles if same color
-        this.props.checkColumn(this.props.x, this.props.currentUser);  //check column on 4 tiles if same color
+        this.props.checkRowAndColumn(this.props.x, this.props.currentUser);     //check row on 4 tiles if same color
         // this.props.checkDiagonal1(this.props.x, this.props.currentUser); //check diagonal1 on 4 tiles if same color
         // this.props.checkDiagonal2(this.props.x, this.props.currentUser); //check diagonal2 on 4 tiles if same color
-       this.props.toggleUser();
     }
 render() {
     let cellClass = "cell ",
