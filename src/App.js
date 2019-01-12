@@ -14,18 +14,34 @@ class App extends Component {
       winMessage: false
     }
   }
-  sendTileDrop = (x) => {
+  pushTileDrop = (x) => {
     // console.log("tileDrop, ", x);
     let board = [...this.state.board];
     board[x].push(this.state.current);
+    console.log("BOARD AFTER PUSH",board)
     this.setState(board)
   }
+  pushOrPopHoverTile = (x, hover) => {
+    // debugger;
+    let board = [...this.state.board];
+    if (hover!==-1)
+    {
+      board[x].push("yellow")
+    }    
+    else  
+    {
+      board[x].pop();
+    }
+    console.log("hover and push", hover);
+    console.log("board Push",board[x])
+    this.setState(board) 
+  }
+
   toggleUser = () => {
     let current = this.state.current === "green" ? "blue" : "green";
     this.setState({ current: current });
   }
-  //get index of the top element in the x-column, 
-  //get j-index of current tile
+  //get index of the top element in the x-column, get j-index of current tile
   getTopElement = (x) => {
     for (let j = 0; j < this.state.board[x].length; j++) {
       if (this.state.board[x][j + 1] === undefined) {
@@ -107,8 +123,10 @@ class App extends Component {
         row.push(<GridCell
           board={this.state.board}
           tileColor={this.state.board[x][y]}
-          sendTileDrop={this.sendTileDrop}
+          pushTileDrop={this.pushTileDrop}
           checkRowColumnDiagonals={this.checkRowColumnDiagonals}
+          getTopElement = {this.getTopElement}
+          pushOrPopHoverTile = {this.pushOrPopHoverTile}
           key={x + y}
           x={x} 
           y={y}
