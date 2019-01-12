@@ -1,24 +1,10 @@
 .App {
   display: flex;
-  justify-content: center;
-  margin-top: 30px;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-top: 30px;
+  align-items: center
 }
+
 
 .App-link {
   color: #61dafb;
@@ -34,7 +20,6 @@
 }
 .board {
   background-color:  rgb(13, 58, 110);
-  display: inline-block;
   padding: 10px;
 }
 .cell {
@@ -58,3 +43,63 @@
 .cell.yellow {
   background-color: rgb(245, 245, 171);
 }
+.player-box {
+  justify-content: center;
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+.player-box.red {
+background-color: rgb(209, 65, 144);
+color: black
+}
+.player-box.blue {
+  color: black;
+  background-color: rgb(24, 184, 224);
+}
+.winner-name.red {
+color: rgb(209, 65, 144);
+}
+.winner-name.blue {
+  color: rgb(24, 184, 224);
+}
+.restart-form {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 300px;
+  height: 150px;
+  margin: auto;
+  background: rgb(29, 51, 87);
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+  box-sizing: border-box;
+  z-index: 1;
+  text-align: center;
+}
+
+.restart-form .restart-button {
+  display: flex;
+  justify-content: center;
+ }
+ 
+ .restart-form button {
+   cursor: pointer;
+   border: none;
+   background:rgb(47, 101, 172);
+   width: 80px;
+   height: 35px;
+   margin: 13px 20px;
+   border-radius: 3px;
+   opacity: 0.9;
+   /* box-shadow: 2px 2px rgba(0, 0, 0, 0.3); */
+   color: #5ec6f0 ;
+   font-size: 16px;
+ }
+ .restart-form button:hover{
+   opacity: 1;
+   color: white;
+ }
+

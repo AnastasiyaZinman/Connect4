@@ -15,26 +15,19 @@ class App extends Component {
     }
   }
   pushTileDrop = (x) => {
-    // console.log("tileDrop, ", x);
     let board = [...this.state.board];
     board[x].push(this.state.current);
-    console.log("BOARD AFTER PUSH",board)
     this.setState(board)
   }
   pushOrPopHoverTile = (x, hover) => {
-    // debugger;
     let board = [...this.state.board];
-    if (hover!==-1)
-    {
+    if (hover !== -1) {
       board[x].push("yellow")
-    }    
-    else  
-    {
+    }
+    else {
       board[x].pop();
     }
-    console.log("hover and push", hover);
-    console.log("board Push",board[x])
-    this.setState(board) 
+    this.setState(board)
   }
 
   toggleUser = () => {
@@ -52,7 +45,6 @@ class App extends Component {
   }
   checkRowColumnDiagonals = (x) => {
     let connect4 = this.checkRowAndColumn(x) || this.checkLeftDiagonals(x) || this.checkRightDiagonals(x);
-    console.log("connect4",connect4);
     this.checkWin(connect4);
   }
   checkRowAndColumn = (x) => {
@@ -64,9 +56,9 @@ class App extends Component {
       countByColumn = (this.state.board[x][i] === currentUser) ? countByColumn += 1 : countByColumn = 0;
       i++
     }
-    return (countByRow===4 || countByColumn===4) ? true : false;
+    return (countByRow === 4 || countByColumn === 4) ? true : false;
   }
-  
+
   checkLeftDiagonals = (x) => {
     let currentUser = this.state.current;
     let y = this.getTopElement(x),
@@ -78,10 +70,9 @@ class App extends Component {
       countByLeftDiagonal = (this.state.board[i][j] === currentUser) ? countByLeftDiagonal += 1 : countByLeftDiagonal = 0;
       i++; j--;
     }
-    return (countByLeftDiagonal===4 ? true : false);
+    return (countByLeftDiagonal === 4 ? true : false);
   }
   checkRightDiagonals = (x) => {
-    // debugger;
     let currentUser = this.state.current;
     let y = this.getTopElement(x),
       countByRightDiagonal = 0,
@@ -90,14 +81,20 @@ class App extends Component {
       j = (difOfIndex < 0) ? -difOfIndex : 0;        //if out of board size
     while ((j <= ROW_BOARD - 1 && i <= COL_BOARD - 1) && countByRightDiagonal < 4) {
       countByRightDiagonal = (this.state.board[i][j] === currentUser) ? countByRightDiagonal += 1 : countByRightDiagonal = 0;
-      console.log("i=", i, ' j=', j);
       i++; j++;
     }
-    console.log("countByRightDiagonal", countByRightDiagonal)
-   return (countByRightDiagonal===4 ? true : false)
+    return (countByRightDiagonal === 4 ? true : false)
   }
-
-  clearBoard() {
+  checkWin(connect4) {
+    if (connect4) {
+      this.setState({ winMessage: true });
+    }
+    else {
+      this.toggleUser();
+    }
+  }
+  clearBoard = () => {
+    this.setState({winMessage:false})
     this.setState({
       board: [
         [], [], [], [], [], [], []  // 7 columns
@@ -106,15 +103,7 @@ class App extends Component {
     this.createBoard()
   }
 
-  checkWin(connect4) {
-    if (connect4) {
-      this.setState({ winMessage: true });
-      // this.clearBoard()
-    }
-    else {
-      this.toggleUser();
-    }
-  }
+
   createBoard = () => {
     const cells = [];
     for (let y = ROW_BOARD - 1; y >= 0; y--) {
@@ -125,10 +114,10 @@ class App extends Component {
           tileColor={this.state.board[x][y]}
           pushTileDrop={this.pushTileDrop}
           checkRowColumnDiagonals={this.checkRowColumnDiagonals}
-          getTopElement = {this.getTopElement}
-          pushOrPopHoverTile = {this.pushOrPopHoverTile}
+          getTopElement={this.getTopElement}
+          pushOrPopHoverTile={this.pushOrPopHoverTile}
           key={x + y}
-          x={x} 
+          x={x}
           y={y}
         />)
       }
@@ -136,13 +125,26 @@ class App extends Component {
     }
     return cells
   }
+  
+  winnerPopUp = () => {
+    let winnerName="winner-name " + this.state.current;
+  return (
+  <div className="restart-form">   
+  <p className = {winnerName}> {this.state.current} win!</p>
+    <div className="restart-button">
+        <button onClick={this.clearBoard}>OK</button>
+    </div>
+  </div>
+    )
+  }
 
 
   render() {
+    let player= "player-box " + this.state.current;
     return (
       <div className="App">
-
-        <div> {(this.state.winMessage) ? `Win ${this.state.current}` : null}</div>
+        <div className={player}>{this.state.current}</div>
+        <div className="pop-win"> {(this.state.winMessage) ? this.winnerPopUp() : null}</div>
         <div className="board">{this.createBoard()}</div>
       </div>
     );

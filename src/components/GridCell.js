@@ -9,7 +9,6 @@ class GridCell extends Component {
     }
 
     handleClick() {
-      
         // console.log("onclick",this.state.hover); 
         //  console.log("this.state.board ",this.props.board[this.props.x])
         this.switchHover();
@@ -21,7 +20,6 @@ class GridCell extends Component {
        
     }
     switchHover = () => {
-      
         let hover = - this.state.hover;
         this.setState({hover: hover}); 
         this.props.pushOrPopHoverTile(this.props.x,this.state.hover)   
