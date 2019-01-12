@@ -33,8 +33,9 @@
   }
 }
 .board {
-  background-color: aqua;
+  background-color:  rgb(13, 58, 110);
   display: inline-block;
+  padding: 10px;
 }
 .cell {
   border: 1px solid black;
@@ -43,17 +44,17 @@
   height: 70px;
   cursor: pointer;
   border-radius: 50%;
-  margin:  5px;
+  margin: 5px;
   border: none;
-  background-color: azure;
+  background-color:rgb(210, 220, 224);
 }
 .cell.blue {
-  background-color: blue;
+  background-color: rgb(24, 184, 224);
 }
 
-.cell.green {
-  background-color: green;
+.cell.red {
+  background-color: rgb(209, 65, 144);
 }
 .cell.yellow {
-  background-color: yellow;
+  background-color: rgb(245, 245, 171);
 }

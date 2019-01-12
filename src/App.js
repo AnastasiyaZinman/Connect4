@@ -7,7 +7,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      current: 'green', //first gamer, also can be blue
+      current: 'red', //first gamer, also can be blue
       board: [
         [], [], [], [], [], [], []  // 7 columns
       ],
@@ -38,7 +38,7 @@ class App extends Component {
   }
 
   toggleUser = () => {
-    let current = this.state.current === "green" ? "blue" : "green";
+    let current = this.state.current === "red" ? "blue" : "red";
     this.setState({ current: current });
   }
   //get index of the top element in the x-column, get j-index of current tile
