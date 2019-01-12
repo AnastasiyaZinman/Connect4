@@ -12,7 +12,7 @@ render() {
             
     return(
     <div className={cellClass} onClick={() => this.handleClick()}>
-     <p> {this.props.x}, {this.props.y}</p>
+     {/* <p> {this.props.x}, {this.props.y}</p> */}
     </div>  )
 }
 }

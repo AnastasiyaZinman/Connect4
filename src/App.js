@@ -43,7 +43,7 @@ class App extends Component {
     let currentUser = this.state.current;
     let y = this.getTopElement(x);
     let countByRow = 0, countByColumn = 0; let i = 0;
-    while (i < this.state.board.length && countByRow < 4 && countByColumn < 4) {
+    while (i < this.state.board.length && (countByRow < 4) && (countByColumn < 4)) {
       countByRow = (this.state.board[i][y] === currentUser) ? countByRow += 1 : countByRow = 0;
       countByColumn = (this.state.board[x][i] === currentUser) ? countByColumn += 1 : countByColumn = 0;
       i++
@@ -125,7 +125,7 @@ class App extends Component {
       <div className="App">
 
         <div> {(this.state.winMessage) ? `Win ${this.state.current}` : null}</div>
-        {this.createBoard()}
+        <div className="board">{this.createBoard()}</div>
       </div>
     );
   }
