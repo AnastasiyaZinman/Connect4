@@ -74,15 +74,15 @@ class App extends Component {
   checkLeftDiagonals = (x) => {
     let currentUser = this.state.current;
     let y = this.getTopElement(x),
-      countByLeftDiagonal = 0,
+      counterByLeftDiagonal = 0,
       sumOfIndex = x + y,         // sum of indexes of cell in left diagonal always same
-      j = (sumOfIndex < ROW_BOARD - 1) ? sumOfIndex : ROW_BOARD - 1, //if out of board size change first index value to Max count of rows
+      j = (sumOfIndex < ROW_BOARD - 1) ? sumOfIndex : ROW_BOARD - 1, //if out of board size change first index value to Max number of rows
       i = (sumOfIndex < ROW_BOARD - 1) ? 0 : sumOfIndex - j;         //if out of board size
-    while ((j >= 0 && i <= COL_BOARD - 1) && countByLeftDiagonal < 4) {
-      countByLeftDiagonal = (this.state.board[i][j] === currentUser) ? countByLeftDiagonal += 1 : countByLeftDiagonal = 0;
+    while ((j >= 0 && i <= COL_BOARD - 1) && counterByLeftDiagonal < 4) {
+      counterByLeftDiagonal = (this.state.board[i][j] === currentUser) ? counterByLeftDiagonal += 1 : counterByLeftDiagonal = 0;
       i++; j--;
     }
-    return (countByLeftDiagonal === 4 ? true : false);
+    return (counterByLeftDiagonal === 4 ? true : false);
   }
   // Function checks win in Right Diagonal, which include clicked tile
    // if connect 4  return true, otherwise - false 
@@ -90,15 +90,15 @@ class App extends Component {
   checkRightDiagonals = (x) => {
     let currentUser = this.state.current;
     let y = this.getTopElement(x),
-      countByRightDiagonal = 0,
+      counterByRightDiagonal = 0,
       difOfIndex = x - y,           // difference between indexes of cell in right diagonal always same
       i = (difOfIndex < 0) ? 0 : difOfIndex,         //if out of board size
       j = (difOfIndex < 0) ? - difOfIndex : 0;        //if out of board size
-    while ((j <= ROW_BOARD - 1 && i <= COL_BOARD - 1) && countByRightDiagonal < 4) {
-      countByRightDiagonal = (this.state.board[i][j] === currentUser) ? countByRightDiagonal += 1 : countByRightDiagonal = 0;
+    while ((j <= ROW_BOARD - 1 && i <= COL_BOARD - 1) && counterByRightDiagonal < 4) {
+      counterByRightDiagonal = (this.state.board[i][j] === currentUser) ? counterByRightDiagonal += 1 : counterByRightDiagonal = 0;
       i++; j++;
     }
-    return (countByRightDiagonal === 4 ? true : false)
+    return (counterByRightDiagonal === 4 ? true : false)
   }
   // Check win, if true - get PopUp-form, false - change turn of player
   checkWin(connect4) {
