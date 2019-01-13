@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
-
 class RestartForm extends Component {
-  restartGame = () => {
-  
-  }
-
   render() {
-    let winnerName="winner " + this.props.winner;
+    let winnerName = "winner " + this.props.winner;
     console.log("win");
-  return (
-  <div className="restart-form">   
-  <p className = {winnerName}> 
-  {(this.props.winner===this.props.player1) ? "player 1": "player 2"} 
-  <span className="regular-text"> win! </span>
-  </p>
-    <div className="restart-button">
-        <button onClick={this.props.clearBoard}>&#10004;</button>
-    </div>
-  </div>
-  )
+    return (
+      <div className="restart-form">
+        <p className={winnerName}>
+          {(this.props.winner === this.props.player1) ? "player 1" : "player 2"}
+          <span className="regular-text"> win! </span>
+        </p>
+        <div className="restart-button">
+          <button onClick={this.props.clearBoard}>&#10004;</button>
+        </div>
+      </div>
+    )
   }
 }
 

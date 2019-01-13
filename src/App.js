@@ -5,39 +5,42 @@ import './App.css';
 const COL_BOARD = 7,
       ROW_BOARD = 6,
       PLAYER_1 = "red",
-      PLAYER_2 = "blue"
+      PLAYER_2 = "blue",
+      POSSIBLE_TILE_POSITION = "yellow"
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      current: PLAYER_1, //first gamer, also can be blue
+      current: PLAYER_1,            //first gamer, also can be blue
       board: [
         [], [], [], [], [], [], []  // 7 columns
       ],
       winMessage: false
     }
   }
+  //add new tile to x-column of the board
   pushTileDrop = (x) => {
     let board = [...this.state.board];
     board[x].push(this.state.current);
     this.setState(board)
   }
+  //push or pop possible tile position
   pushOrPopHoverTile = (x, hover) => {
     let board = [...this.state.board];
     if (hover !== -1) {
-      board[x].push("yellow")
+      board[x].push(POSSIBLE_TILE_POSITION)
     }
     else {
       board[x].pop();
     }
     this.setState(board)
   }
-
+ // Change user turn
   toggleUser = () => {
     let current = this.state.current === PLAYER_1 ? PLAYER_2 : PLAYER_1;
     this.setState({ current: current });
   }
-  //get index of the top element in the x-column, get j-index of current tile
+  //get index of the top tile in the x-column, return j-index of current tile
   getTopElement = (x) => {
     for (let j = 0; j < this.state.board[x].length; j++) {
       if (this.state.board[x][j + 1] === undefined) {
@@ -46,10 +49,14 @@ class App extends Component {
     }
     return -1
   }
+  // Function checks win of current player in Row, Column and Diagonals,
+  //  which include clicked tile. Return true (connect4) if Win
   checkRowColumnDiagonals = (x) => {
     let connect4 = this.checkRowAndColumn(x) || this.checkLeftDiagonals(x) || this.checkRightDiagonals(x);
     this.checkWin(connect4);
   }
+  // Function checks win in Row and Column, which include clicked tile
+  // if connect 4  return true, otherwise - false 
   checkRowAndColumn = (x) => {
     let currentUser = this.state.current;
     let y = this.getTopElement(x);
@@ -61,33 +68,39 @@ class App extends Component {
     }
     return (countByRow === 4 || countByColumn === 4) ? true : false;
   }
-
+   // Function checks win in Left Diagonal, which include clicked tile
+   // if connect 4  return true, otherwise - false 
+   // Checking from left to right, from top to bottom
   checkLeftDiagonals = (x) => {
     let currentUser = this.state.current;
     let y = this.getTopElement(x),
       countByLeftDiagonal = 0,
-      sumOfIndex = x + y,
+      sumOfIndex = x + y,         // sum of indexes of cell in left diagonal always same
       j = (sumOfIndex < ROW_BOARD - 1) ? sumOfIndex : ROW_BOARD - 1, //if out of board size change first index value to Max count of rows
-      i = (sumOfIndex < ROW_BOARD - 1) ? 0 : sumOfIndex - j;        //if out of board size
+      i = (sumOfIndex < ROW_BOARD - 1) ? 0 : sumOfIndex - j;         //if out of board size
     while ((j >= 0 && i <= COL_BOARD - 1) && countByLeftDiagonal < 4) {
       countByLeftDiagonal = (this.state.board[i][j] === currentUser) ? countByLeftDiagonal += 1 : countByLeftDiagonal = 0;
       i++; j--;
     }
     return (countByLeftDiagonal === 4 ? true : false);
   }
+  // Function checks win in Right Diagonal, which include clicked tile
+   // if connect 4  return true, otherwise - false 
+   // Checking from bottom to top, from right to left
   checkRightDiagonals = (x) => {
     let currentUser = this.state.current;
     let y = this.getTopElement(x),
       countByRightDiagonal = 0,
-      difOfIndex = x - y,
+      difOfIndex = x - y,           // difference between indexes of cell in right diagonal always same
       i = (difOfIndex < 0) ? 0 : difOfIndex,         //if out of board size
-      j = (difOfIndex < 0) ? -difOfIndex : 0;        //if out of board size
+      j = (difOfIndex < 0) ? - difOfIndex : 0;        //if out of board size
     while ((j <= ROW_BOARD - 1 && i <= COL_BOARD - 1) && countByRightDiagonal < 4) {
       countByRightDiagonal = (this.state.board[i][j] === currentUser) ? countByRightDiagonal += 1 : countByRightDiagonal = 0;
       i++; j++;
     }
     return (countByRightDiagonal === 4 ? true : false)
   }
+  // Check win, if true - get PopUp-form, false - change turn of player
   checkWin(connect4) {
     if (connect4) {
       this.setState({ winMessage: true });
@@ -96,6 +109,7 @@ class App extends Component {
       this.toggleUser();
     }
   }
+  // Clear board, Set first properties for new game
   clearBoard = () => {
     this.setState({winMessage:false, current: PLAYER_1, newGame:true})
     this.setState({
@@ -105,9 +119,8 @@ class App extends Component {
     })
     this.createBoard()
   }
-
+// Create board 7x6
   createBoard = () => {
-    
     const cells = [];
     for (let y = ROW_BOARD - 1; y >= 0; y--) {
       const row = [];
