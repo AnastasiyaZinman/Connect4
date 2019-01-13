@@ -101,7 +101,7 @@ class App extends Component {
   }
   // Clear board, Set first properties for new game
   clearBoard = () => {
-    this.setState({winMessage:false, current: PLAYER_1, newGame:true})
+    this.setState({winMessage:false, current: PLAYER_1})
     this.setState({
       board: [
         [], [], [], [], [], [], []  // 7 columns
