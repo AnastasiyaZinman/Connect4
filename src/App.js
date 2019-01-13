@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GridCell from './components/GridCell';
+import RestartForm from './components/RestartForm';
 import './App.css';
 const COL_BOARD = 7,
   ROW_BOARD = 6;
@@ -94,7 +95,7 @@ class App extends Component {
     }
   }
   clearBoard = () => {
-    this.setState({winMessage:false})
+    this.setState({winMessage:false, current: 'red',newGame:true})
     this.setState({
       board: [
         [], [], [], [], [], [], []  // 7 columns
@@ -103,8 +104,8 @@ class App extends Component {
     this.createBoard()
   }
 
-
   createBoard = () => {
+    
     const cells = [];
     for (let y = ROW_BOARD - 1; y >= 0; y--) {
       const row = [];
@@ -116,35 +117,26 @@ class App extends Component {
           checkRowColumnDiagonals={this.checkRowColumnDiagonals}
           getTopElement={this.getTopElement}
           pushOrPopHoverTile={this.pushOrPopHoverTile}
-          key={x + y}
+          newGame={this.state.newGame}
+          ROW_BOARD = {ROW_BOARD}
           x={x}
           y={y}
+          key={x + y}
         />)
       }
-      cells.push(<div key={y} className="row">{row}</div>)
+      cells.push(<div key={y} className="row">{row}</div>);
     }
     return cells
   }
-  
-  winnerPopUp = () => {
-    let winnerName="winner-name " + this.state.current;
-  return (
-  <div className="restart-form">   
-  <p className = {winnerName}> {this.state.current} win!</p>
-    <div className="restart-button">
-        <button onClick={this.clearBoard}>OK</button>
-    </div>
-  </div>
-    )
-  }
-
-
+ 
   render() {
     let player= "player-box " + this.state.current;
     return (
       <div className="App">
         <div className={player}>{this.state.current}</div>
-        <div className="pop-win"> {(this.state.winMessage) ? this.winnerPopUp() : null}</div>
+        <div className="pop-win"> {(this.state.winMessage) ? 
+        <RestartForm winner={this.state.current} clearBoard={this.clearBoard}/> 
+        : null}</div>
         <div className="board">{this.createBoard()}</div>
       </div>
     );
