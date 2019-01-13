@@ -3,12 +3,14 @@ import GridCell from './components/GridCell';
 import RestartForm from './components/RestartForm';
 import './App.css';
 const COL_BOARD = 7,
-  ROW_BOARD = 6;
+      ROW_BOARD = 6,
+      PLAYER_1 = "red",
+      PLAYER_2 = "blue"
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      current: 'red', //first gamer, also can be blue
+      current: PLAYER_1, //first gamer, also can be blue
       board: [
         [], [], [], [], [], [], []  // 7 columns
       ],
@@ -32,7 +34,7 @@ class App extends Component {
   }
 
   toggleUser = () => {
-    let current = this.state.current === "red" ? "blue" : "red";
+    let current = this.state.current === PLAYER_1 ? PLAYER_2 : PLAYER_1;
     this.setState({ current: current });
   }
   //get index of the top element in the x-column, get j-index of current tile
@@ -95,7 +97,7 @@ class App extends Component {
     }
   }
   clearBoard = () => {
-    this.setState({winMessage:false, current: 'red',newGame:true})
+    this.setState({winMessage:false, current: PLAYER_1, newGame:true})
     this.setState({
       board: [
         [], [], [], [], [], [], []  // 7 columns
@@ -133,9 +135,9 @@ class App extends Component {
     let player= "player-box " + this.state.current;
     return (
       <div className="App">
-        <div className={player}>{this.state.current}</div>
+        <div className={player}>{(this.state.current===PLAYER_1) ? "PLAYER 1": "PLAYER 2"}</div>
         <div className="pop-win"> {(this.state.winMessage) ? 
-        <RestartForm winner={this.state.current} clearBoard={this.clearBoard}/> 
+        <RestartForm winner={this.state.current} player1={PLAYER_1} clearBoard={this.clearBoard}/> 
         : null}</div>
         <div className="board">{this.createBoard()}</div>
       </div>

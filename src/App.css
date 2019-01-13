@@ -30,7 +30,7 @@
   border-radius: 50%;
   margin: 10px;
   border: none;
-  background-color:rgb(210, 220, 224);
+  background-color:rgb(191, 197, 199);
 }
 .cell.blue {
   background-color: rgb(24, 184, 224);
@@ -55,13 +55,14 @@ color: black
   color: black;
   background-color: rgb(24, 184, 224);
 }
-.winner-name {
-  font-size: 20px;
+.winner {
+  text-transform : uppercase;
+  font-size: 15px;
 }
-.winner-name.red {
+.winner.red {
 color: rgb(209, 65, 144);
 }
-.winner-name.blue {
+.winner.blue {
   color: rgb(24, 184, 224);
 }
 .restart-form {
@@ -73,10 +74,10 @@ color: rgb(209, 65, 144);
   bottom: 0;
   left: 0;
   right: 0;
-  width: 200px;
+  width: 180px;
   height: 120px;
   margin: auto;
-  background: rgb(29, 51, 87);
+  background: rgb(32, 54, 92);
   border-radius: 5px;
   color: white;
   padding: 10px;
@@ -85,6 +86,10 @@ color: rgb(209, 65, 144);
   text-align: center;
 }
 
+span.regular-text {
+  color: rgb(224, 219, 219);
+  text-transform: lowercase;
+}
 .restart-form .restart-button {
   display: flex;
   justify-content: center;
