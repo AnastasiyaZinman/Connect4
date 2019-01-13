@@ -10,7 +10,7 @@ class GridCell extends Component {
     // also change hover value if cell/tile is clicked
     handleClick() {
         //can push new tile and change player's turn just if column is not full
-        if (this.props.board[this.props.x][this.props.ROW_BOARD] === undefined) 
+        if (this.props.board[this.props.x][this.props.ROW_BOARD-1] === undefined) 
         {
             this.switchHover();
             this.props.pushTileDrop(this.props.x); //push new tile to array

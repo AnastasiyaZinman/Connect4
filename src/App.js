@@ -11,7 +11,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      current: PLAYER_1,            //first gamer, also can be blue
+      current: PLAYER_1,            //first player, also can be blue
       board: [
         [], [], [], [], [], [], []  // 7 columns
       ],
@@ -111,7 +111,7 @@ class App extends Component {
   }
   // Clear board, Set first properties for new game
   clearBoard = () => {
-    this.setState({winMessage:false, current: PLAYER_1, newGame:true})
+    this.setState({winMessage:false, current: PLAYER_1})
     this.setState({
       board: [
         [], [], [], [], [], [], []  // 7 columns
@@ -130,9 +130,7 @@ class App extends Component {
           tileColor={this.state.board[x][y]}
           pushTileDrop={this.pushTileDrop}
           checkRowColumnDiagonals={this.checkRowColumnDiagonals}
-          getTopElement={this.getTopElement}
           pushOrPopHoverTile={this.pushOrPopHoverTile}
-          newGame={this.state.newGame}
           ROW_BOARD = {ROW_BOARD}
           x={x}
           y={y}
