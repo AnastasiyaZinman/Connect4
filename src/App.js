@@ -5,8 +5,8 @@ import './App.css';
 const COL_BOARD = 7,
       ROW_BOARD = 6,
       PLAYER_1 = "red",
-      PLAYER_2 = "blue",
-      POSSIBLE_TILE_POSITION = "yellow"
+      PLAYER_2 = "blue"
+
 class App extends Component {
   constructor() {
     super();
@@ -24,17 +24,7 @@ class App extends Component {
     board[x].push(this.state.current);
     this.setState(board)
   }
-  //push or pop possible tile position
-  pushOrPopHoverTile = (x, hover) => {
-    let board = [...this.state.board];
-    if (hover !== -1) {
-      board[x].push(POSSIBLE_TILE_POSITION)
-    }
-    else {
-      board[x].pop();
-    }
-    this.setState(board)
-  }
+  
  // Change user turn
   toggleUser = () => {
     let current = this.state.current === PLAYER_1 ? PLAYER_2 : PLAYER_1;
@@ -126,13 +116,10 @@ class App extends Component {
       const row = [];
       for (let x = 0; x < COL_BOARD; x++) {
         row.push(<GridCell
-          board={this.state.board}
-          tileColor={this.state.board[x][y]}
-          pushTileDrop={this.pushTileDrop}
-          checkRowColumnDiagonals={this.checkRowColumnDiagonals}
-          getTopElement={this.getTopElement}
-          pushOrPopHoverTile={this.pushOrPopHoverTile}
-          newGame={this.state.newGame}
+          board = {this.state.board}
+          tileColor = {this.state.board[x][y]}
+          pushTileDrop = {this.pushTileDrop}
+          checkRowColumnDiagonals = {this.checkRowColumnDiagonals}
           ROW_BOARD = {ROW_BOARD}
           x={x}
           y={y}

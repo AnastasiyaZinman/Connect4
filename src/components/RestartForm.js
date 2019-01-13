@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 class RestartForm extends Component {
   render() {
     let winnerName = "winner " + this.props.winner;
-    console.log("win");
     return (
       <div className="restart-form">
         <p className={winnerName}>
