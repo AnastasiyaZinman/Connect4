@@ -132,6 +132,7 @@ class App extends Component {
           checkRowColumnDiagonals={this.checkRowColumnDiagonals}
           pushOrPopHoverTile={this.pushOrPopHoverTile}
           ROW_BOARD = {ROW_BOARD}
+          possiblePosColor = {POSSIBLE_TILE_POSITION}
           x={x}
           y={y}
           key={x + y}
