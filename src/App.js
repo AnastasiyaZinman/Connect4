@@ -43,12 +43,6 @@ class App extends Component {
   //get index of the top tile in the x-column, return j-index of current tile
   getTopElement = (x) => {
     return this.state.board[x].length-1
-    /*for (let j = 0; j < this.state.board[x].length; j++) {
-      if (this.state.board[x][j + 1] === undefined) {
-        return j
-      }
-    }
-    return -1*/
   }
   // Function checks win of current player in Row, Column and Diagonals,
   //  which include clicked tile. Return true (connect4) if Win
