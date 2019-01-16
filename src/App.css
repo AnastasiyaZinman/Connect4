@@ -17,6 +17,7 @@
   }
 }
 .board {
+  min-width: 630px;
   background-color:  rgb(13, 58, 110);
   padding: 10px;
   margin-left: -10px;
