@@ -3,7 +3,7 @@ class GridCell extends Component {
     constructor() {
         super();
         this.state = {
-            hover: 1
+            hover: true
         }
     }
     // Add new cell/tile of current player and check connect4 in Row, Column and Diagonals
@@ -16,7 +16,7 @@ class GridCell extends Component {
             this.switchHover();
             this.props.pushTileDrop(this.props.x); //push new tile to array
             this.props.checkRowColumnDiagonals(this.props.x);  //, this.props.currentUser check row on 4 tiles if same color
-            this.setState({ hover: -1 })
+            this.setState({ hover: false })
             this.props.pushOrPopHoverTile(this.props.x, 1)
         }
         else alert("this column is already full")
@@ -24,8 +24,12 @@ class GridCell extends Component {
 
     // switch hover and set state of hover-value depending on onMouse event
     switchHover = () => {
-        let hover = - this.state.hover;
-        this.setState({ hover: hover });
+        // let hover = - this.state.hover;
+        this.setState(prevState => {
+            return { 
+              hover: !prevState.hover  
+            };
+          });
         this.props.pushOrPopHoverTile(this.props.x, this.state.hover)
     }
     render() {

@@ -27,7 +27,7 @@ class App extends Component {
   //push or pop possible tile position
   pushOrPopHoverTile = (x, hover) => {
     let board = [...this.state.board];
-    if (hover !== -1) {
+    if (hover !== false) {
       board[x].push(POSSIBLE_TILE_POSITION)
     }
     else {
